@@ -1,9 +1,8 @@
 import { Fragment } from "react";
-import { Route } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import Comments from "../components/comments/Comments";
 import HighlightedTicket from "../components/tickets/HighlightedTicket";
-
+import { useMatch } from "react-router-dom";
 const Dummy_Tickets = [
   { id: "t1", author: "Yas", text: "Problems with using react router v5" },
   { id: "q2", author: "Nur", text: "Switch component not working" },
@@ -20,12 +19,13 @@ const TicketDetail = () => {
 
   return (
     <Fragment>
-      <HighlightedTicket
-        text={ticket.text}
-        author={ticket.author}
-      ></HighlightedTicket>
-      <p>{params.ticketID}</p>
-      {/* <Route path="/tickets/:ticketID/comments" element={<Comments />}></Route> */}
+      <HighlightedTicket text={ticket.text} author={ticket.author} />
+      <div className="centered">
+        <Link className="btn--flat" to="comments">
+          Load Comments
+        </Link>
+      </div>
+      <Outlet />
     </Fragment>
   );
 };

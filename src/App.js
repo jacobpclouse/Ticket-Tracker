@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import AllTickets from "./pages/AllTickets";
 import NewTickets from "./pages/NewTickets";
@@ -13,9 +12,8 @@ function App() {
         <Route exact path="/" element={<AllTickets />}></Route>
         <Route exact path="tickets" element={<AllTickets />}></Route>
         <Route path="tickets/:ticketID" element={<TicketDetail />}>
-          {/* <Route path="comments" element={<Comments />}></Route> */}
+          <Route path="comments" element={<Comments />}></Route>
         </Route>
-        <Route path="tickets/:ticketID/comments" element={<Comments />} />
         <Route path="new-ticket" element={<NewTickets />}></Route>
         <Route path="*" element={<Errorpage />} />
       </Routes>
