@@ -1,24 +1,25 @@
-import { Redirect } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AllTickets from "./pages/AllTickets";
 import NewTickets from "./pages/NewTickets";
 import TicketDetail from "./pages/TicketDetail";
+import Layout from "./components/layout/Layout";
+import Comments from "./components/comments/Comments";
+import Errorpage from "./pages/Errorpage";
 function App() {
   return (
-    <Switch>
-      <Route exact path="/">
-        <Redirect to="/tickets" />
-      </Route>
-      <Route exact path="/tickets">
-        <AllTickets />
-      </Route>
-      <Route exact path="/ticket/:ticketID">
-        <TicketDetail />
-      </Route>
-      <Route exact path="/new-ticket">
-        <NewTickets />
-      </Route>
-    </Switch>
+    <Layout>
+      <Routes>
+        <Route exact path="/" element={<AllTickets />}></Route>
+        <Route exact path="tickets" element={<AllTickets />}></Route>
+        <Route path="tickets/:ticketID" element={<TicketDetail />}>
+          {/* <Route path="comments" element={<Comments />}></Route> */}
+        </Route>
+        <Route path="tickets/:ticketID/comments" element={<Comments />} />
+        <Route path="new-ticket" element={<NewTickets />}></Route>
+        <Route path="*" element={<Errorpage />} />
+      </Routes>
+    </Layout>
   );
 }
 
