@@ -7,6 +7,7 @@ const CommentsList = (props) => {
       {props.comments.map((comment) => (
         <CommentItem key={comment.id} text={comment.text} />
       ))}
+      {console.log(props.comments, "this is from comment list comp")}
     </ul>
   );
 };

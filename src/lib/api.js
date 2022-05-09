@@ -23,8 +23,8 @@ export async function getAllTickets() {
   return transformedTickets;
 }
 
-export async function getSingleTicket(ticketID) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/tickets/${ticketID}.json`);
+export async function getSingleTicket(ticketId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/tickets/${ticketId}.json`);
   const data = await response.json();
 
   if (!response.ok) {
@@ -32,7 +32,7 @@ export async function getSingleTicket(ticketID) {
   }
 
   const loadedTicket = {
-    id: ticketID,
+    id: ticketId,
     ...data,
   };
 
@@ -58,7 +58,7 @@ export async function addTicket(ticketData) {
 
 export async function addComment(requestData) {
   const response = await fetch(
-    `${FIREBASE_DOMAIN}/comments/${requestData.ticketID}.json`,
+    `${FIREBASE_DOMAIN}/comments/${requestData.ticketId}.json`,
     {
       method: "POST",
       body: JSON.stringify(requestData.commentData),
@@ -76,8 +76,8 @@ export async function addComment(requestData) {
   return { commentId: data.name };
 }
 
-export async function getAllComments(ticketID) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${ticketID}.json`);
+export async function getAllComments(ticketId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${ticketId}.json`);
 
   const data = await response.json();
 

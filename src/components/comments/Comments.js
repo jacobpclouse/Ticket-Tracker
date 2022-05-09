@@ -10,20 +10,23 @@ import CommentsList from "./CommentsList";
 const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
   const params = useParams();
+  const { ticketId } = params;
+
   const { sendRequest, status, data: loadedComments } = useHttp(getAllComments);
+
   console.log(loadedComments, "this are comments", "status:", status);
 
-  const { ticketID } = params;
-
   useEffect(() => {
-    sendRequest(ticketID);
-  }, [sendRequest, ticketID]);
+    sendRequest(ticketId);
+  }, [sendRequest, ticketId]);
 
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
 
-  const addedCommentHandler = () => {};
+  const addedCommentHandler = useCallback(() => {
+    sendRequest(ticketId);
+  }, [sendRequest, ticketId]);
 
   let comments;
 
@@ -34,13 +37,10 @@ const Comments = () => {
       </div>
     );
   }
-  console.log(loadedComments);
 
   if (status === "completed" && loadedComments && loadedComments.length > 0) {
     comments = <CommentsList comments={loadedComments} />;
-    console.log("reached mid block");
   }
-  console.log(loadedComments);
 
   if (
     status === "completed" &&
@@ -49,7 +49,6 @@ const Comments = () => {
     comments = <p className="='centered">No Comments were added yet!</p>;
   }
 
-  console.log(comments, "these are the");
   return (
     <section className={classes.comments}>
       <h2>User Comments</h2>
@@ -60,7 +59,7 @@ const Comments = () => {
       )}
       {isAddingComment && (
         <NewCommentForm
-          ticketID={ticketID}
+          ticketId={ticketId}
           onAddedComment={addedCommentHandler}
         />
       )}

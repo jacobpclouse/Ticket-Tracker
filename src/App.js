@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<AllTickets />}></Route>
         <Route exact path="tickets" element={<AllTickets />}></Route>
-        <Route path="tickets/:ticketID" element={<TicketDetail />}>
+        <Route path="tickets/:ticketId" element={<TicketDetail />}>
           <Route path="comments" element={<Comments />}></Route>
         </Route>
         <Route path="new-ticket" element={<NewTickets />}></Route>

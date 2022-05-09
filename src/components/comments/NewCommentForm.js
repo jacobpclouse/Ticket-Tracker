@@ -1,10 +1,10 @@
 import { useRef } from "react";
-
 import classes from "./NewCommentForm.module.css";
 import { addComment } from "../../lib/api";
 import useHttp from "../../hooks/use-http";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { useEffect } from "react";
+
 const NewCommentForm = (props) => {
   const { sendRequest, status, error } = useHttp(addComment);
   const commentTextRef = useRef();
@@ -24,8 +24,8 @@ const NewCommentForm = (props) => {
     const enteredText = commentTextRef.current.value;
     // send comment to server
     sendRequest({
-      commentData: { Text: enteredText },
-      ticketID: props.ticketID,
+      commentData: { text: enteredText },
+      ticketId: props.ticketId,
     });
   };
 

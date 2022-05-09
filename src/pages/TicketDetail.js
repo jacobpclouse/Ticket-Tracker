@@ -16,11 +16,11 @@ const TicketDetail = () => {
     error,
   } = useHttp(getSingleTicket, true);
 
-  const { ticketID } = params;
+  const { ticketId } = params;
 
   useEffect(() => {
-    sendRequest(ticketID);
-  }, [sendRequest, ticketID]);
+    sendRequest(ticketId);
+  }, [sendRequest, ticketId]);
 
   if (status === "pending") {
     return (
