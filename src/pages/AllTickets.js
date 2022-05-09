@@ -13,6 +13,8 @@ const AllTickets = () => {
     error,
   } = useHttp(getAllTickets, true);
 
+  console.log(loadedTickets, "loaded tickets");
+
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
