@@ -5,7 +5,7 @@ import classes from "./MainNavigation.module.css";
 const MainNavigation = () => {
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>Great Tickets</div>
+      <div className={classes.logo}>Ticket Tracker</div>
       <nav className={classes.nav}>
         <ul>
           <li>
@@ -21,7 +21,7 @@ const MainNavigation = () => {
               style={({ isActive }) => ({ color: isActive ? "white" : "" })}
               to="/new-ticket"
             >
-              Add a Quote
+              Add a New Ticket
             </NavLink>
           </li>
         </ul>
