@@ -2,24 +2,48 @@ import { Fragment } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import HighlightedTicket from "../components/tickets/HighlightedTicket";
-import { useMatch } from "react-router-dom";
-const Dummy_Tickets = [
-  { id: "t1", author: "Yas", text: "Problems with using react router v5" },
-  { id: "q2", author: "Nur", text: "Switch component not working" },
-];
+import useHttp from "../hooks/use-http";
+import { getSingleTicket } from "../lib/api";
+import { useEffect } from "react";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const TicketDetail = () => {
   const params = useParams();
+  const {
+    sendRequest,
+    status,
+    data: loadedTicket,
+    error,
+  } = useHttp(getSingleTicket, true);
 
-  const ticket = Dummy_Tickets.find((ticket) => ticket.id === params.ticketID);
+  const { ticketID } = params;
 
-  if (ticket === undefined) {
+  useEffect(() => {
+    sendRequest(ticketID);
+  }, [sendRequest, ticketID]);
+
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="centered focused">{error}</p>;
+  }
+
+  if (!loadedTicket.text) {
     return <h1>No tickets found</h1>;
   }
 
   return (
     <Fragment>
-      <HighlightedTicket text={ticket.text} author={ticket.author} />
+      <HighlightedTicket
+        text={loadedTicket.text}
+        author={loadedTicket.author}
+      />
       <div className="centered">
         <Link className="btn--flat" to="comments">
           Load Comments

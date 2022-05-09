@@ -1,4 +1,4 @@
-.noquotes {
+.notickets {
   height: 20rem;
   margin: auto;
   display: flex;
@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.noquotes p {
+.notickets p {
   color: #262c2c;
   font-size: 3rem;
   font-weight: bold;
